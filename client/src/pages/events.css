@@ -11,3 +11,19 @@
 	padding: 1rem;
 	border: 1px solid #5101d1;
 }
+
+.grid_vert-space {
+	margin-top: "500px";
+	position: relative;
+
+}
+
+.logLink {
+	color: #FFF;
+	text-decoration: none;
+}
+
+.drawerLink {
+	color: #696969;
+	text-decoration: none;
+}
