@@ -37,7 +37,7 @@ function Events(){
    			}
    			return res.json();
 		}).then(resData =>{
-
+			
 			const events1= resData.data.events;
 			setResult(events1);
 
