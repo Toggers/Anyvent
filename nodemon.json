@@ -1,7 +1,7 @@
 {
-	"env":{
-		"MONGO_USER": "Jin_123",
-		"MONGO_PASSWORD" : "1UE5PfKOG8eRjIuz",
-		"MONGO_DB": "eventDB"
-	}
+    "env": {
+        "MONGO_USER": "marcello",
+        "MONGO_PASSWORD": "JUIJYxsahseS107f",
+        "MONGO_DB": "codelabs"
+    }
 }
