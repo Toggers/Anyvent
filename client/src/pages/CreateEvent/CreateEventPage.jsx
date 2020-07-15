@@ -12,7 +12,6 @@ function CreateEvent(){
   const [title,setTitle]= useState(""); 
   const [description,setDescription]= useState(""); 
   const [price,setPrice]= useState(0); 
-  const [date,setDate]= useState("2020-07-08T16:10:44.426Z"); 
 
 
   function handleTitleChange(e){                                                   //2. e is syntax event
@@ -31,16 +30,15 @@ function CreateEvent(){
     setDate(e.target.value);
   }
 
-
   function onSubmitHandle(e){                                                      //5. after sumbit, this function will trigger 
    
       e.preventDefault();                                                            //6. need to write this to use console.log() 
-      console.log('state = ', title, description, price,date );
+      console.log('state = ', title, description, price);
 
       const requestBody={
         query:`
           mutation{
-            createEvent(eventInput:{title:"${title}", description:"${description}",price: ${price},date: "${date}"}){
+            createEvent(eventInput:{title:"${title}", description:"${description}",price: ${price},date: "${new Date(Date.now()).toISOString()}"}){
                 _id
                 title
             }
