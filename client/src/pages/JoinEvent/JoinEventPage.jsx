@@ -38,6 +38,7 @@ function Events(){
    			return res.json();
 		}).then(resData =>{
 			const events1= resData.data.events;
+			console.log(events1)
 			setEvents(events1);
 
 		}).catch(err =>{

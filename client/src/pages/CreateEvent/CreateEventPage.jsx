@@ -12,6 +12,7 @@ function CreateEvent(){
   const [title,setTitle]= useState(""); 
   const [description,setDescription]= useState(""); 
   const [price,setPrice]= useState(0); 
+  
 
 
   function handleTitleChange(e){                                                   //2. e is syntax event
@@ -26,10 +27,7 @@ function CreateEvent(){
     setPrice(e.target.value);
   }
 
-  function handleDateChange(e){                                                   //2. e is syntax event
-    setDate(e.target.value);
-  }
-
+  
   function onSubmitHandle(e){                                                      //5. after sumbit, this function will trigger 
    
       e.preventDefault();                                                            //6. need to write this to use console.log() 
@@ -178,25 +176,6 @@ function CreateEvent(){
                        <Grid item xs={3}>
 
                        </Grid>
-
-                       <Grid item xs={1}>
-
-                      </Grid>
-                      <Grid item xs={2} container justify="center">
-                       
-                          <span>Date: </span>
-
-                       </Grid>
-
-                       <Grid item xs={6}>
-                          <input type="text" style={{width: "120%"}} value ={date} onChange={handleDateChange} placeholder = "2020-07-08T16:10:44.426Z" required/> 
-                       </Grid>
-
-                       <Grid item xs={3}>
-                          
-                       </Grid>
-                      
-
                       
                        <Grid item xs={12} container justify="center">
                           <Grid item xs={4} container justify="center">
