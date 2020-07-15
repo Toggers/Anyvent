@@ -1,0 +1,118 @@
+import React, {useState, useEffect} from 'react';
+import '../events.css';
+import '../AppNavBar/AppNavbar.jsx'
+import AppNavbar from '../AppNavBar/AppNavbar.jsx';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import PageController from './PageController.jsx';
+
+
+function EventItem ({title, description, date, place}) {
+
+    var gapi = window.gapi
+    var CLIENT_ID = "828540566167-q88jt3ch2bnineavqegae2t6volaqfeq.apps.googleusercontent.com"
+    var API_KEY = "AIzaSyChVexDZG5Mtd5M6-Gsbf6wGP1Txb3mh50"
+    var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
+    var SCOPES = "https://www.googleapis.com/auth/calendar.readonly"
+
+    const handleClick = () => {
+      gapi.load('client:auth2', () => {
+        console.log('loaded client')
+
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES,
+        })
+
+        gapi.client.load('calendar', 'v3', () => console.log('bam!'))
+
+        gapi.auth2.getAuthInstance().signIn()
+        .then(() => {
+          
+          var event = {
+            'summary': 'Awesome Event!',
+            'location': '800 Howard St., San Francisco, CA 94103',
+            'description': 'Really great refreshments',
+            'start': {
+              'dateTime': '2020-07-28T09:00:00-07:00',
+              'timeZone': 'America/Los_Angeles'
+            },
+            'end': {
+              'dateTime': '2020-07-28T17:00:00-09:00',
+              'timeZone': 'America/Los_Angeles'
+            },
+            'recurrence': [
+              'RRULE:FREQ=DAILY;COUNT=2'
+            ],
+            'attendees': [
+              {'email': 'lpage@example.com'},
+              {'email': 'sbrin@example.com'}
+            ],
+            'reminders': {
+              'useDefault': false,
+              'overrides': [
+                {'method': 'email', 'minutes': 24 * 60},
+                {'method': 'popup', 'minutes': 10}
+              ]
+            }
+          }
+
+          console.log(">>>0 " + gapi.client)
+          console.log(">>>1 " + gapi.client.calendar)
+          console.log(">>>2 " + gapi.client.calendar.events)
+
+          var request = gapi.client.calendar.events.insert({
+            'calendarId': 'primary',
+            'resource': event,
+          })
+
+          request.execute(event => {
+            console.log(event)
+            window.open(event.htmlLink)
+          })
+      
+
+        })
+      })
+    }
+
+    return(
+            
+            <Grid className="event" item xs={12} container direction="column" alignItems="center" justify="space-evenly"> 
+                    <Grid item xs={1}>
+                        
+                    </Grid>
+
+                    <Grid item xs={2}>
+                        <p>{title}</p>
+                    </Grid>
+
+                    <Grid item xs={3}>
+                        <p>{description}</p>
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        
+                    </Grid>
+
+                    <Grid item xs={2}>
+                        <p>{date}</p>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                        <button onClick={handleClick}>Add Event To Calendar</button>
+                 
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        
+                    </Grid>
+                  
+            </Grid>
+            
+    )
+}
+
+export default EventItem

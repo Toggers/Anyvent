@@ -10,6 +10,7 @@ import SwipeableDrawer from './EventDrawer.jsx';
 import '../events.css';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar.jsx';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,12 +35,20 @@ function AppNavbar() {
                     </Grid>
 
                     <Grid item xs={1} justify="flex-start">
-                        <Typography variant="h6" className={classes.title}>
-                            Events
+                        <Typography variant="h6" className={classes.title}> 
+                            Anyvent
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={8}>
+                    <Grid item xs={5}>
+                        
+                    </Grid>
+
+                    <Grid container item xs={2} justify="flex-start">
+                        <SearchBar></SearchBar>
+                    </Grid>
+
+                    <Grid item xs={1}>
                         
                     </Grid>
 

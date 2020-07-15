@@ -2,10 +2,8 @@ import React, {useState} from 'react';
 import DropDown from './DropDown.jsx'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import SearchBar from './SearchBar.jsx';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import SearchIcon from '@material-ui/icons/Search';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -30,7 +28,7 @@ function Eventbar() {
 							</Grid>
 
 							<Grid container item xs={3} justify="flex-start">
-                                <SearchBar></SearchBar>
+                                
 							</Grid>
 
 							<Grid item xs={2}>

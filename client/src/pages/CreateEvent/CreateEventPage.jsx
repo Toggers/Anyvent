@@ -1,5 +1,11 @@
 import React,{useState} from 'react';
 import AppNavbar from '../AppNavBar/AppNavbar.jsx';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import '../events.css';
+import imageFiller from '../../images/imageFiller.png';
+import AddIcon from '@material-ui/icons/Add';
+
 
 function CreateEvent(){
 
@@ -24,7 +30,6 @@ function CreateEvent(){
   function handleDateChange(e){                                                   //2. e is syntax event
     setDate(e.target.value);
   }
-  
 
 
   function onSubmitHandle(e){                                                      //5. after sumbit, this function will trigger 
@@ -66,32 +71,151 @@ function CreateEvent(){
   };
 
 
+
     return (
       
-    <form onSubmit={onSubmitHandle}>   
-      <AppNavbar></AppNavbar>                                     
-            <div>
-               <span>Title: </span>
-               <input  type="text" value ={title} onChange={handleTitleChange} required/>    
-            </div>
+      <div>
+      <AppNavbar></AppNavbar>      
+            
+            <br></br>
+            <br></br>
 
-            <div>
-              <span>Description: </span>
-               <input type="text" value ={description} onChange={handleDescriptionChange} required/> 
-            </div>
-            <div>
-              <span>Price: </span>
-               <input type="number" value ={price} onChange={handlePriceChange} required/> 
-            </div>
+            
+            <Grid container justify="center">
+            <Grid item xs={7}>
+              <Paper elevation={3}>
+               <Grid item xs={12}>
+                
+                  <Grid container justify="center">
+                    <h1>Create an Event</h1>
+                  </Grid>
+                
+                </Grid> 
+                </Paper>
+            </Grid>
+            </Grid>
 
-            <div>
-              <span>Date: </span>
-               <input type="text" value ={date} onChange={handleDateChange} placeholder = "2020-07-08T16:10:44.426Z" required/> 
-            </div>
 
-            <button>sumbit</button>
+            <br></br>
+            <br></br>
+            
+            <Grid item xs={3} container justify="center">
+              <div className="imageRectangle"></div>
+            </Grid>
 
-         </form>
+            <br></br>
+
+            <Grid item xs={3} container justify="center">
+              <div className="addPhoto">
+                <button onclick="changeImage()">
+                  <Grid container alignItems="center" justify="space-between">
+                    <AddIcon></AddIcon> 
+                    Add Event Photo
+                  </Grid>
+                </button>
+              </div>
+            </Grid>
+
+            <Grid item xs={3} container justify="center">
+              <img className="imageFiller" src={imageFiller} />
+            </Grid>
+
+            
+                   
+            <Grid container justify="center">
+            <Grid item xs={7}>
+              <Paper elevation={2} className="inputPaper">
+               <Grid item xs={12}>
+                
+                  <Grid container justify="center" direction="row" spacing={6}>
+
+                      <Grid item xs={1}>
+
+                      </Grid>
+                      <Grid item xs={2} container justify="center">
+                       
+                          <span>Title: </span>
+
+                       </Grid>
+
+                       <Grid item xs={6}>
+                          <input  type="text" style={{width: "120%"}} value ={title} onChange={handleTitleChange} required/>    
+                       </Grid>
+
+                       <Grid item xs={3}>
+
+                       </Grid>
+                      
+
+                      <Grid item xs={1}>
+
+                      </Grid>
+                      <Grid item xs={2} container justify="center">
+                       
+                          <span>Description: </span>
+
+                       </Grid>
+
+                       <Grid item xs={6}>
+                        <input type="text" style={{width: "120%"}} value ={description} onChange={handleDescriptionChange} required/> 
+                       </Grid>
+
+                       <Grid item xs={3}>
+
+                       </Grid> 
+
+                       <Grid item xs={1}>
+
+                      </Grid>
+                      <Grid item xs={2} container justify="center">
+                       
+                          <span>Price: </span>
+
+                       </Grid>
+
+                       <Grid item xs={6}>
+                          <input type="number" style={{width: "120%"}} value ={price} onChange={handlePriceChange} required/> 
+                       </Grid>
+
+                       <Grid item xs={3}>
+
+                       </Grid>
+
+                       <Grid item xs={1}>
+
+                      </Grid>
+                      <Grid item xs={2} container justify="center">
+                       
+                          <span>Date: </span>
+
+                       </Grid>
+
+                       <Grid item xs={6}>
+                          <input type="text" style={{width: "120%"}} value ={date} onChange={handleDateChange} placeholder = "2020-07-08T16:10:44.426Z" required/> 
+                       </Grid>
+
+                       <Grid item xs={3}>
+                          
+                       </Grid>
+                      
+
+                      
+                       <Grid item xs={12} container justify="center">
+                          <Grid item xs={4} container justify="center">
+                            <form onSubmit={onSubmitHandle}>  
+                              <button>Sumbit</button>
+                            </form>
+                          </Grid>
+                       </Grid>
+
+                      
+                  </Grid>
+                
+                </Grid> 
+                </Paper>
+            </Grid>
+            </Grid>
+        </div>
     );
 }
 

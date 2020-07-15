@@ -10,6 +10,8 @@ import './App.css';
 
 
 function App() {
+  
+
   return (
     <BrowserRouter>
       <Route path="/" exact component={JoinEventsPage}/>

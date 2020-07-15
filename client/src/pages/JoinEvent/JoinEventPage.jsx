@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../events.css';
 import '../AppNavBar/AppNavbar.jsx'
 import AppNavbar from '../AppNavBar/AppNavbar.jsx';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Eventbar from './Eventbar.jsx'
-
+import Eventbar from './Eventbar.jsx';
+import PageController from './PageController.jsx';
+import EventItem from './EventItem.jsx';
 
 function Events(){
-
-	const [result,setResult]= useState([]); 
+	const [events, setEvents] = useState([])
 
 	function fetchEvents(){
 		const requestBody={
@@ -37,29 +37,35 @@ function Events(){
    			}
    			return res.json();
 		}).then(resData =>{
-
 			const events1= resData.data.events;
-			setResult(events1);
+			setEvents(events1);
 
 		}).catch(err =>{
    			console.log(err);
 		});
 	};
 
-
-	fetchEvents();
+	useEffect(() => {
+		fetchEvents()
+	}, [])
  	
-	const eventlist = result.map(element =>{
-		return <div key={element._id} className="events_list-item" > {element.title}</div>
+	const eventlist = events.map(element =>{
+		return <EventItem key={element._id} title={element.title} description={element.description} date={element.date} place={element.place}> </EventItem>
 	});
+
+
+    const [totalEvents, setTotalEvents] = useState(100)
+
  	
     return (
 
     	<div>
 			<AppNavbar />
 			
-			<Grid container spacing={1} direction="row">
+			<br></br>
 
+			<Grid container spacing={1} direction="row">
+				
 				<Grid className="grid_vert-space" container justify="center">
 				
 					<h1>Join Our Events</h1>
@@ -68,20 +74,44 @@ function Events(){
 
 				<Grid container justify="center">
 					<Grid item xs={4}>
-						<p>We have hundreds of live events you can join, like hackathons, concerts, conventions, and art shows!</p>
+						<div className="joinEventText">
+							<p>We have hundreds of live events you can join, like hackathons, concerts, conventions, and art shows!</p>
+						</div>
 					</Grid>
 				</Grid>
 
 			</Grid>
 			
+			<br></br>
 
 			<Eventbar />
 
-   			<ul className="event_list">
-   	
-   				{eventlist}
-   	
-   			</ul>
+			<br></br>
+
+			<Grid item xs={12} container justify="center"> 
+			<Grid item xs={8}> 
+				
+					<Grid item xs={12} className="event" container direction="row"> 
+						
+						
+							{eventlist}
+				
+					
+                    </Grid> 
+               
+               </Grid> 
+
+            </Grid>
+   			
+			<br></br>
+
+			<Grid item xs={12} container justify="center" alignItems="center">
+				<Paper>
+					<PageController totalEvents={ totalEvents } />
+				</Paper> 
+            </Grid> 
+
+			<br></br>
    	
    		</div>
     );

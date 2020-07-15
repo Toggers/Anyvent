@@ -1,9 +1,5 @@
-.events_list{
-	width: 40rem;
-	max-width:90%;
-	margin: 2rem auto;
-	list-style:none;
-	padding: 0;
+.event{
+	border: 1px solid black;
 
 }
 .events_list-item{
@@ -26,4 +22,33 @@
 .drawerLink {
 	color: #696969;
 	text-decoration: none;
+}
+
+.joinEventText {
+	text-align: 'center';
+	font-size: 18;
+}
+
+.imageRectangle {
+		position: absolute;
+		display: inline-block;
+		width: 16.5%;
+		height: 31%;
+		background: lightsteelblue;
+}
+
+.addPhoto {
+	position: absolute;
+	top: 65%;
+}
+
+.imageFiller {
+	position: absolute;
+	top: 35%;
+	width: 12%;
+	height: 20%;
+}
+
+.inputPaper {
+	background-color: lightsteelblue;
 }
