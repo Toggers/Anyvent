@@ -21,9 +21,9 @@ module.exports = {
 
     },
     createEvent: async (args, req) =>{
-        if(!req.isAuth){
-            throw new Error('Not authenticated!');
-        }
+        // if(!req.isAuth){
+        //     throw new Error('Not authenticated!');
+        // }
 
         const newEvent= new Event({          //create new event
                 category: args.eventInput.category,
