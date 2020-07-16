@@ -16,18 +16,6 @@ const user_function = async userId => {
     }
 }
 
-//   events: () => {
-//     return Event.find().then(events =>{
-//         return events.map(event =>{
-//              return {...event._doc,
-//                     date: (new Date(event._doc.date)+"")};
-//         });
-//     }).catch(err =>{
-//         throw err;
-//     });
-
-// }
-
 
 const events_function = async eventIds =>{                          //use async and await, instead of return
     try{

@@ -45,6 +45,7 @@ function Events(){
    			return res.json();
 		}).then(resData =>{
 			const events1= resData.data.events;
+			console.log(events1)
 			setEvents(events1);
 
 		}).catch(err =>{
@@ -63,6 +64,7 @@ function Events(){
 
     const [totalEvents, setTotalEvents] = useState(100)
 
+ 	
     return (
 
     	<div>
@@ -96,9 +98,13 @@ function Events(){
 
 			<Grid item xs={12} container justify="center"> 
 			<Grid item xs={8}> 
-			
-					<Grid item xs={12} className="event" container direction="row"> 			
+				
+					<Grid item xs={12} className="event" container direction="row"> 
+						
+						
 							{eventlist}
+				
+					
                     </Grid> 
                
                </Grid> 

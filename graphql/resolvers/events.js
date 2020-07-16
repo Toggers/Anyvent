@@ -4,17 +4,20 @@ const User =require('../../models/user');
 const {user_function} =require('./merge');
 
 module.exports = {
-   events: () =>{
-            return Event.find().then(events =>{
+   events: async () =>{
+            try{
+                const events=await Event.find();
+             
                 return events.map(event =>{
                     return {...event._doc,
                             date: (new Date(event._doc.date)+""),
                             eventDate:  (new Date(event._doc.eventDate)+""),
                             author: user_function.bind(this,event._doc.author)};
                 });
-            }).catch(err =>{
+            }catch(err){
                 throw err;
-            });
+            
+            }
 
     },
     createEvent: async (args) =>{

@@ -81,7 +81,7 @@ function EventItem ({title, description, date, place, event_id}) {
     function buyTicketHandler(){
        console.log("click buy");
 
-        const requestBody={
+      const requestBody={
         query:`
           mutation{
             createTicket(eventID: "${event_id}"){
