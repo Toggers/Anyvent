@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import PageController from './PageController.jsx';
 
 
-function EventItem ({title, description, date, place}) {
+function EventItem ({title, description, date, place, event_id}) {
 
     var gapi = window.gapi
     var CLIENT_ID = "828540566167-q88jt3ch2bnineavqegae2t6volaqfeq.apps.googleusercontent.com"
@@ -78,6 +78,42 @@ function EventItem ({title, description, date, place}) {
       })
     }
 
+    function buyTicketHandler(){
+       console.log("click buy");
+
+        const requestBody={
+        query:`
+          mutation{
+            createTicket(eventID: "${event_id}"){
+                _id
+            }
+          }
+        `
+      };
+
+      fetch('http://localhost:8000/graphql',{
+          method: 'POST',
+          body:JSON.stringify(requestBody),
+
+          headers:{
+            'Content-Type': 'application/json'
+         }
+      }).then(res =>{
+        
+        if(res.status !==200 &&res.status !==201){
+          throw new Error('Failed!');
+        }
+        return res.json();
+      }).then(resData =>{
+
+        alert(`Purchased!! The default user with id: ${"5f0fbb9d33fd28024c74694f"} has purchased the event ${title}, event id: ${event_id}      ......  Check Database`);
+
+      }).catch(err =>{
+        console.log(err);
+      });
+
+    }
+
     return(
             
             <Grid className="event" item xs={12} container direction="column" alignItems="center" justify="space-evenly"> 
@@ -98,11 +134,21 @@ function EventItem ({title, description, date, place}) {
                     </Grid>
 
                     <Grid item xs={2}>
-                        <p>{date}</p>
+                        <p> {date}</p>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                        <p>{place}</p>
                     </Grid>
 
                     <Grid item xs={2}>
                         <button onClick={handleClick}>Add Event To Calendar</button>
+                 
+                    </Grid>
+
+
+                    <Grid item xs={2}>
+                        <button onClick={buyTicketHandler}>Buy Ticket</button>
                  
                     </Grid>
 
