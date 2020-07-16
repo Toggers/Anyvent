@@ -60,16 +60,16 @@ app.use('/graphql', graphqlHTTP({
 	graphiql: true
 }));
 
-// mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-eoevk.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`).then(()=>{
-// 	app.listen(8000);
-// }).catch(err =>{
-// 	console.log(err);
-// });
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-eoevk.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`).then(()=>{
+	app.listen(8000);
+}).catch(err =>{
+	console.log(err);
+});
 
-mongoose.connect( // marcello's connection string
-    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ddczh.gcp.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`).then(() =>{
-        app.listen(3000);
-     }).catch(err =>{
-        console.log(err);
-     }); 
+// mongoose.connect( // marcello's connection string
+//     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ddczh.gcp.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`).then(() =>{
+//         app.listen(3000);
+//      }).catch(err =>{
+//         console.log(err);
+//      }); 
 

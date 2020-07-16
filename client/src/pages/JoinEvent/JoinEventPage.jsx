@@ -19,6 +19,13 @@ function Events(){
 						_id
 						title
 						description
+						eventDate
+						address_location
+						address_city
+						address_state
+						address_zipcode
+						capacity
+						category
 						date
 						price
 					}
@@ -51,7 +58,7 @@ function Events(){
 	}, [])
  	
 	const eventlist = events.map(element =>{
-		return <EventItem key={element._id} title={element.title} description={element.description} date={element.date} place={element.place}> </EventItem>
+		return <EventItem key={element._id} event_id={element._id} title={element.title} description={element.description} date={element.eventDate} place={`${element.address_location} ${element.address_city} ${element.address_state} ${element.address_zipcode}`}> </EventItem>
 	});
 
 
