@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,8 +15,9 @@ import Container from '@material-ui/core/Container';
 import AppNavbar from '../AppNavBar/AppNavbar.jsx';
 import googleSign from '../../images/googleSign.png';
 
-
 function LoginEmail() {
+
+
   const useStyles = makeStyles((theme) => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -38,7 +39,66 @@ function LoginEmail() {
   }))
   
   const classes = useStyles();
-  console.log('reached here')
+  console.log('reached here');
+
+
+//-------------------------------------------------------Handle email,password, and submit-------------------------
+  const [email, setEmail] = useState("");
+  const [password, setPassword] =useState(""); 
+
+
+  function emailHandler(e){
+    setEmail(e.target.value);
+  }
+
+  function passwordHandler(e){
+    setPassword(e.target.value);
+  }
+
+  function onSubmitHandler(e){
+     e.preventDefault(); 
+     console.log(email,password);
+
+      if(email.trim().length===0||password.trim().length==0){
+        return;
+     }
+
+      const requestBody={
+        query:`
+          query{
+            login(email:"${email}", password:"${password}"){
+                userId
+                token
+                tokenExpiration
+            }
+          }
+        `
+      };
+
+
+
+      fetch('http://localhost:8000/graphql',{
+          method: 'POST',
+          body:JSON.stringify(requestBody),
+
+          headers:{
+            'Content-Type': 'application/json'
+         }
+       }).then(res =>{
+        
+        if(res.status !==200 &&res.status !==201){
+          throw new Error('Failed!');
+        }
+            return res.json();
+        }).then(resData=>{
+            console.log(resData);
+        }).catch(err =>{
+            console.log(err);
+      });
+  }
+
+//----------------------------------------------------------------------------------
+
   return (
       <div>
     <AppNavbar />
@@ -54,7 +114,7 @@ function LoginEmail() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={onSubmitHandler}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -65,6 +125,8 @@ function LoginEmail() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={emailHandler}
           />
           <TextField
             variant="outlined"
@@ -76,6 +138,8 @@ function LoginEmail() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={passwordHandler}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
