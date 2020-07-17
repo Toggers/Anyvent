@@ -22,7 +22,9 @@ app.use((req,res,next) =>{
 });
 
 app.use(bodyParser.json());
+
 app.use(isAuth);
+
 app.use('/graphql', graphqlHTTP({
 	schema: graphQLSchema,
 	rootValue: graphQLResolver,

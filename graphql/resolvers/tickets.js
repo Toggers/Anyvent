@@ -5,7 +5,10 @@ const {ticket_event_function, user_function} =require('./merge');
 
 
 module.exports ={
-	tickets: async () =>{
+	tickets: async (args,req) =>{
+		// if(!req.isAuth){
+  //           throw new Error('Not authenticated!');
+  //       }
 		try{
 			const tickets = await Ticket.find();
 			return tickets.map(ticket =>{
@@ -21,7 +24,11 @@ module.exports ={
 
 
 	},
-	createTicket: async (args) =>{
+	createTicket: async (args, req) =>{
+		// if(!req.isAuth){
+  //           throw new Error('Not authenticated!');
+  //       }
+
 		const foundEvent =await Event.findOne({_id: args.eventID});
 
 		const newTicket= new Ticket({          //create new event
@@ -43,7 +50,11 @@ module.exports ={
 
 
 	},
-	cancelTicket : async (args) =>{
+	cancelTicket : async (args,req) =>{
+		// if(!req.isAuth){
+  //           throw new Error('Not authenticated!');
+  //       }
+        
 		try{
 			const ticket =await Ticket.findById(args.ticketID).populate('event');    //now there is event info inside variable ticket 
 

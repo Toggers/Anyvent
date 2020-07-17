@@ -1,5 +1,5 @@
 import AppNavbar from '../AppNavBar/AppNavbar.jsx';
-import React from 'react';
+import React , {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -38,6 +38,81 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
 
+
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] =useState(""); 
+  const [first, setFirst] = useState("");
+  const [last, setLast] =useState(""); 
+
+
+  function emailHandler(e){
+    setEmail(e.target.value);
+  }
+
+  function passwordHandler(e){
+    setPassword(e.target.value);
+  }
+
+   function firstHandler(e){
+    setFirst(e.target.value);
+  }
+
+  function lastHandler(e){
+    setLast(e.target.value);
+  }
+
+
+  
+
+   function onSubmitHandler(e){
+     e.preventDefault(); 
+     console.log(email,password, last, first);
+
+     if(email.trim().length===0||password.trim().length==0){
+        return;
+     }
+
+      const requestBody={
+        query:`
+          mutation{
+            createUser(userInput:{email:"${email}", password: "${password}"}){
+                _id
+                email
+                
+            }
+          }
+        `
+      };
+
+      fetch('http://localhost:8000/graphql',{
+          method: 'POST',
+          body:JSON.stringify(requestBody),
+
+          headers:{
+            'Content-Type': 'application/json'
+         }
+      }).then(res =>{
+        
+        if(res.status !==200 &&res.status !==201){
+          throw new Error('Failed!');
+        }
+            return res.json();
+        }).then(resData=>{
+            console.log(resData);
+            setEmail("");
+            setFirst("");
+            setLast("");
+            setPassword("");
+
+            alert("Registered successfully!!, now go to login page ");
+
+        }).catch(err =>{
+            console.log(err);
+      });
+  }
+
+
   return (
       <div>
 
@@ -51,29 +126,36 @@ export default function SignUp() {
             <Typography component="h1" variant="h5">
             Sign up
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} noValidate onSubmit={onSubmitHandler}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                 <TextField
                     autoComplete="fname"
                     name="firstName"
                     variant="outlined"
-                    required
+                   
                     fullWidth
                     id="firstName"
                     label="First Name"
                     autoFocus
+                    value={first}
+                    onChange={firstHandler}
+                    
+                    required
                 />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                 <TextField
                     variant="outlined"
-                    required
+                    
                     fullWidth
                     id="lastName"
                     label="Last Name"
                     name="lastName"
                     autoComplete="lname"
+                    value={last}
+                    onChange={lastHandler}
+                    required
                 />
                 </Grid>
                 <Grid item xs={12}>
@@ -85,6 +167,8 @@ export default function SignUp() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    value={email}
+                    onChange={emailHandler}
                 />
                 </Grid>
                 <Grid item xs={12}>
@@ -97,6 +181,8 @@ export default function SignUp() {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    value={password}
+                    onChange={passwordHandler}
                 />
                 </Grid>
         
@@ -107,6 +193,7 @@ export default function SignUp() {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                
             >
                 Sign Up
             </Button>
