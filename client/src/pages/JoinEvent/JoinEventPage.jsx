@@ -71,13 +71,23 @@ function Events(){
 			<AppNavbar />
 			
 			<br></br>
+			<br></br>
+			<br></br>
+
+			<Grid item xs={12} container justify="center">
+              <div className="joinRectangle"></div>
+            </Grid>
 
 			<Grid container spacing={1} direction="row">
 				
-				<Grid className="grid_vert-space" container justify="center">
-				
-					<h1>Join Our Events</h1>
+				<Grid className="joinEventTitle" container justify="center">
 
+					<Grid item xs={12}>
+						<br></br>
+					</Grid>
+					
+					<h1>Our Upcoming Events</h1>
+					
 				</Grid>
 
 				<Grid container justify="center">
@@ -91,15 +101,18 @@ function Events(){
 			</Grid>
 			
 			<br></br>
+			<br></br>
 
 			<Eventbar />
 
 			<br></br>
+			<br></br>
+
 
 			<Grid item xs={12} container justify="center"> 
 			<Grid item xs={8}> 
 				
-					<Grid item xs={12} className="event" container direction="row"> 
+					<Grid item xs={12} container direction="row"> 
 						
 						
 							{eventlist}

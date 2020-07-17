@@ -8,8 +8,8 @@
 	border: 1px solid #5101d1;
 }
 
-.grid_vert-space {
-	margin-top: "500px";
+.joinEventTitle {
+
 	position: relative;
 
 }
@@ -25,8 +25,9 @@
 }
 
 .joinEventText {
-	text-align: 'center';
+	text-align: center;
 	font-size: 18;
+	font-weight: 200;
 }
 
 .imageRectangle {
@@ -35,6 +36,16 @@
 		width: 16.5%;
 		height: 31%;
 		background: lightsteelblue;
+		border-radius: 25px;
+}
+
+.joinRectangle {
+	position: absolute;
+	display: inline-block;
+	width: 5%;
+	height: 1%;
+	background: lightsteelblue;
+
 }
 
 .addPhoto {
@@ -46,7 +57,7 @@
 	position: absolute;
 	top: 35%;
 	width: 12%;
-	height: 20%;
+	height: 21%;
 }
 
 .inputPaper {

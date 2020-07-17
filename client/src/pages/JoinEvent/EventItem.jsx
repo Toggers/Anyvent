@@ -5,7 +5,7 @@ import AppNavbar from '../AppNavBar/AppNavbar.jsx';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import PageController from './PageController.jsx';
-
+import Divider from '@material-ui/core/Divider';
 
 function EventItem ({title, description, date, place, event_id}) {
 
@@ -115,48 +115,77 @@ function EventItem ({title, description, date, place, event_id}) {
     }
 
     return(
+        <div>
             
-            <Grid className="event" item xs={12} container direction="column" alignItems="center" justify="space-evenly"> 
-                    <Grid item xs={1}>
+            <Grid  item xs={12} container direction="row" alignItems="center" justify="space-evenly"> 
+                    <Grid item xs={6}>
+                        <p>img here</p>
+                    </Grid>
+
+                    <Grid item xs={6}>
+                        <h2>{title}</h2>
+                    </Grid>
+
+
+
+                    <Grid item xs={6}>
                         
                     </Grid>
 
-                    <Grid item xs={2}>
-                        <p>{title}</p>
-                    </Grid>
-
-                    <Grid item xs={3}>
+                    <Grid item xs={6}>
                         <p>{description}</p>
                     </Grid>
 
-                    <Grid item xs={1}>
+
+                    <Grid item xs={12}>
+                        <br></br>
+                    </Grid>
+
+
+                    <Grid item xs={6}>
                         
                     </Grid>
 
-                    <Grid item xs={2}>
+                    <Grid item xs={6}>
+                        <Divider></Divider>
+                    </Grid>
+
+              
+                    <Grid item xs={6}>
+                        
+                    </Grid>
+
+                    <Grid item xs={3}>
                         <p> {date}</p>
                     </Grid>
 
-                    <Grid item xs={2}>
+                    <Grid item xs={3}>
                         <p>{place}</p>
                     </Grid>
 
-                    <Grid item xs={2}>
+
+                  
+                    <Grid item xs={6}>
+                        
+                    </Grid>
+
+                    <Grid item xs={3}>
                         <button onClick={handleClick}>Add Event To Calendar</button>
                  
                     </Grid>
 
-
-                    <Grid item xs={2}>
+                    <Grid item xs={3}>
                         <button onClick={buyTicketHandler}>Buy Ticket</button>
                  
                     </Grid>
-
-                    <Grid item xs={1}>
-                        
-                    </Grid>
                   
             </Grid>
+
+            <br></br>
+            <br></br>
+
+            <Divider></Divider>
+        </div>
             
     )
 }

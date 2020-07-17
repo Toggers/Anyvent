@@ -109,9 +109,6 @@ function CreateEvent(){
         console.log(err);
       });
 
-
-
-
   };
 
 
@@ -150,13 +147,13 @@ function CreateEvent(){
 
             <br></br>
 
-            <Grid item xs={3} container justify="center">
+            <Grid item xs={3} container justify="flex-end">
               <div className="addPhoto">
                 <button onclick="changeImage()">
 
                   <Grid container alignItems="center" justify="space-between">
                     <AddIcon></AddIcon> 
-                    Add Event Photo
+                      Add Event Photo
                   </Grid>
                 </button>
                 <br/>
@@ -205,9 +202,7 @@ function CreateEvent(){
 
                       </Grid>
                       <Grid item xs={2} container justify="center">
-                       
                           <span>Title: </span>
-
                        </Grid>
 
                        <Grid item xs={6}>
