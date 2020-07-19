@@ -47,6 +47,11 @@ const eventSchema =new Schema({
 		type: Date,
 		required: true
 	},
+	imageURL:{
+		
+		type: String,
+		required:true
+	},
 	author:{
 		 type: Schema.Types.ObjectId, 
          ref: 'User'

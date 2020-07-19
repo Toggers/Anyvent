@@ -37,6 +37,7 @@ module.exports = {
                 price: +args.eventInput.price,
                 eventDate: new Date(args.eventInput.eventDate),
                 date: new Date(args.eventInput.date),
+                imageURL: args.eventInput.imageURL,
                 author: '5f0fbb9d33fd28024c74694f'
         });
 

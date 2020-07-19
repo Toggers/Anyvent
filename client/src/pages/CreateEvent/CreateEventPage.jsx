@@ -5,11 +5,12 @@ import Paper from '@material-ui/core/Paper';
 import '../events.css';
 import imageFiller from '../../images/imageFiller.png';
 import AddIcon from '@material-ui/icons/Add';
+import ReactFilestack from 'filestack-react';
 
 
 function CreateEvent(){
 
- const [category, setCategory] = useState("Hackthon");
+  const [category, setCategory] = useState("Hackthon");
   const [capacity, setCapacity] =useState(0); 
   const [title,setTitle]= useState(""); 
   const [description,setDescription]= useState(""); 
@@ -23,6 +24,9 @@ function CreateEvent(){
 
   const [time,setTime]=useState("00:00");
   const [eventDate,setEventDate]= useState(""); 
+
+  const [imageURL, setImageURL] =useState("");
+  const [imageName, setImageName]=useState("");
 
 
   
@@ -69,9 +73,7 @@ function CreateEvent(){
     setCategory(e.target.value);
   }
 
-  function fileHandler(e){
-    console.log(e.target.files[0]);
-  }
+ 
 
 
 
@@ -79,12 +81,12 @@ function CreateEvent(){
    
       e.preventDefault();                                                            //6. need to write this to use console.log() 
       const actual_time=eventDate+" "+time;
-      console.log('state = ', title, description, price, e.target.name, actual_time);
+      console.log('state = ', title, description, price, e.target.name, actual_time, imageURL);
 
-       const requestBody={
+      const requestBody={
         query:`
           mutation{
-            createEvent(eventInput:{category: "${category}", title:"${title}", description:"${description}", address_location: "${address_location}", address_city: "${address_city}", address_state: "${address_state}", address_zipcode: ${address_zipcode},capacity: ${capacity},price: ${price}, eventDate: "${actual_time}",date: "${new Date()+""}"}){
+            createEvent(eventInput:{category: "${category}", title:"${title}", description:"${description}", address_location: "${address_location}", address_city: "${address_city}", address_state: "${address_state}", address_zipcode: ${address_zipcode},capacity: ${capacity},price: ${price}, eventDate: "${actual_time}",date: "${new Date()+""}",  imageURL: "${imageURL}"}){
                 _id
                 title
             }
@@ -102,9 +104,42 @@ function CreateEvent(){
       }).then(res =>{
         
         if(res.status !==200 &&res.status !==201){
+          alert("There is error!!! Make sure you upload the image and fill in all the fields!!!")
           throw new Error('Failed!');
         }
         return res.json();
+      }).then(resData=>{
+        console.log(resData);
+        if(resData.errors){
+          
+          alert("There is an error!! Make sure you upload the image and fill in all the fields!!!")
+        }else{
+          setCategory("Hackthon");
+          setCapacity(0); 
+          setTitle(""); 
+          setDescription(""); 
+          setPrice(0); 
+
+
+          setAddress_location(""); 
+          setAddress_city(""); 
+          setAddress_state(""); 
+          setAddress_zipcode(11111); 
+
+          setTime("00:00");
+          setEventDate(""); 
+
+          setImageURL("");
+          setImageName("");
+
+          alert("Successful!!");
+
+        }
+
+
+
+
+
       }).catch(err =>{
         console.log(err);
       });
@@ -157,7 +192,20 @@ function CreateEvent(){
                   </Grid>
                 </button>
                 <br/>
-                <input type="file" />
+
+                 <div>
+                      <ReactFilestack
+                        apikey={"AZwqWYMVLRYCOCtIQDBqAz"}
+                        onSuccess={(res) => {
+                          setImageURL(res.filesUploaded[0].url);
+                          setImageName(res.filesUploaded[0].filename);
+                        }
+
+                      }
+                       required/>
+                      {imageName}
+
+                  </div>
               </div>
             </Grid>
 
@@ -188,7 +236,7 @@ function CreateEvent(){
                           <select value={category} onChange={handleCategoryChange} >
                              <option value="Hackthon">Hackthon</option>
                               <option value="Art Show">Art Show</option>
-                                <option value="Convention">Conventions</option>
+                                <option value="Convention">Convention</option>
                               <option value="Concert">Concert</option>
                           </select>
                        </Grid>

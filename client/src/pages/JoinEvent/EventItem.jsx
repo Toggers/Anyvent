@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import PageController from './PageController.jsx';
 import Divider from '@material-ui/core/Divider';
 
-function EventItem ({title, description, date, place, event_id}) {
+function EventItem ({title, description, date, place, event_id, imageURL}) {
 
     var gapi = window.gapi
     var CLIENT_ID = "828540566167-q88jt3ch2bnineavqegae2t6volaqfeq.apps.googleusercontent.com"
@@ -119,7 +119,7 @@ function EventItem ({title, description, date, place, event_id}) {
             
             <Grid  item xs={12} container direction="row" alignItems="center" justify="space-evenly"> 
                     <Grid item xs={6}>
-                        <p>img here</p>
+                        <img src ={imageURL} alt="image here" height="200px" width="300px"/>
                     </Grid>
 
                     <Grid item xs={6}>

@@ -27,6 +27,7 @@ function Events(){
 						capacity
 						category
 						date
+						imageURL
 						price
 					}
 				}
@@ -58,7 +59,7 @@ function Events(){
 	}, [])
  	
 	const eventlist = events.map(element =>{
-		return <EventItem key={element._id} event_id={element._id} title={element.title} description={element.description} date={element.eventDate} place={`${element.address_location} ${element.address_city} ${element.address_state} ${element.address_zipcode}`}> </EventItem>
+		return <EventItem key={element._id} event_id={element._id} title={element.title} imageURL ={element.imageURL} description={element.description} date={element.eventDate} place={`${element.address_location} ${element.address_city} ${element.address_state} ${element.address_zipcode}`}> </EventItem>
 	});
 
 

@@ -23,6 +23,7 @@ type Event {
     price: Float!
     eventDate: String!
     date:String!
+    imageURL: String!
 
     author: User
 
@@ -41,7 +42,8 @@ input EventInput {
     capacity: Int!
     price: Float!
     eventDate: String!
-    date:String!
+    date: String!
+    imageURL: String!
 }
 
 type User {
