@@ -70,11 +70,7 @@ function Events(){
 
     	<div>
 			<AppNavbar />
-			
-			<br></br>
-			<br></br>
-			<br></br>
-
+		
 			<Grid item xs={12} container justify="center">
               <div className="joinRectangle"></div>
             </Grid>
@@ -84,6 +80,7 @@ function Events(){
 				<Grid className="joinEventTitle" container justify="center">
 
 					<Grid item xs={12}>
+						<br></br>
 						<br></br>
 					</Grid>
 					
@@ -106,7 +103,6 @@ function Events(){
 
 			<Eventbar />
 
-			<br></br>
 			<br></br>
 
 

@@ -182,18 +182,9 @@ function CreateEvent(){
 
             <br></br>
 
-            <Grid item xs={3} container justify="flex-end">
-              <div className="addPhoto">
-                <button onclick="changeImage()">
-
-                  <Grid container alignItems="center" justify="space-between">
-                    <AddIcon></AddIcon> 
-                      Add Event Photo
-                  </Grid>
-                </button>
-                <br/>
-
-                 <div>
+            <Grid item xs={3} container justify="center" alignItems="center">
+                <div className="addPhoto">
+              
                       <ReactFilestack
                         apikey={"AZwqWYMVLRYCOCtIQDBqAz"}
                         onSuccess={(res) => {
@@ -202,11 +193,11 @@ function CreateEvent(){
                         }
 
                       }
-                       required/>
-                      {imageName}
-
-                  </div>
-              </div>
+                        required/>
+                      {imageName} 
+                  
+                  <br/>
+                </div>
             </Grid>
 
             <Grid item xs={3} container justify="center">
@@ -436,6 +427,10 @@ function CreateEvent(){
                 </Paper>
             </Grid>
             </Grid>
+
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     );
 }

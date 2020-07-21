@@ -12,24 +12,20 @@ import './App.css';
 
 
 
-function App() {
-  
+function App() { 
 
   return (
     <BrowserRouter>
       
       	<Switch>
       		
-      		 <Route path="/" exact component={JoinEventsPage}/>
-        		 <Route path="/home" exact component={HomePage}/>
+      		 <Route path="/joinEvent" exact component={JoinEventsPage}/>
+        		 <Route path="/" exact component={HomePage}/>
         	     <Route path="/createEvent" exact component={CreateEventsPage}/>
                <Route path="/login" exact component={LoginPage}/>
                <Route path="/signup" exact component={SignUpPage}/>
 
       	</Switch>
-    
-     
-    
     </BrowserRouter>
   );
 }

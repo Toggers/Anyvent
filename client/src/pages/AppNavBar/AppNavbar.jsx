@@ -35,9 +35,9 @@ function AppNavbar() {
                     </Grid>
 
                     <Grid item xs={1} justify="flex-start">
-                        <Typography variant="h6" className={classes.title}> 
+                        <h3 className="titleNav"> 
                             Anyvent
-                        </Typography>
+                        </h3>
                     </Grid>
 
                     <Grid item xs={5}>

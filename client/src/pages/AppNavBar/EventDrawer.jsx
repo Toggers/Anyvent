@@ -28,9 +28,9 @@ const useStyles = makeStyles({
 
 function onPageSwitch(index) {
     if (index == 0) {
-        return "/home"
-    } else if (index == 1) {
         return "/"
+    } else if (index == 1) {
+        return "/joinEvent"
     } else if (index == 2) {
         return "/createEvent"
     }

@@ -128,36 +128,7 @@ export default function SignUp() {
             </Typography>
             <form className={classes.form} noValidate onSubmit={onSubmitHandler}>
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                <TextField
-                    autoComplete="fname"
-                    name="firstName"
-                    variant="outlined"
-                   
-                    fullWidth
-                    id="firstName"
-                    label="First Name"
-                    autoFocus
-                    value={first}
-                    onChange={firstHandler}
-                    
-                    required
-                />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                <TextField
-                    variant="outlined"
-                    
-                    fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="lname"
-                    value={last}
-                    onChange={lastHandler}
-                    required
-                />
-                </Grid>
+                
                 <Grid item xs={12}>
                 <TextField
                     variant="outlined"

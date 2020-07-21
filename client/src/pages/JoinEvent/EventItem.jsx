@@ -32,9 +32,9 @@ function EventItem ({title, description, date, place, event_id, imageURL}) {
         .then(() => {
           
           var event = {
-            'summary': 'Awesome Event!',
-            'location': '800 Howard St., San Francisco, CA 94103',
-            'description': 'Really great refreshments',
+            'summary': title,
+            'location': place,
+            'description': description,
             'start': {
               'dateTime': '2020-07-28T09:00:00-07:00',
               'timeZone': 'America/Los_Angeles'
@@ -45,10 +45,6 @@ function EventItem ({title, description, date, place, event_id, imageURL}) {
             },
             'recurrence': [
               'RRULE:FREQ=DAILY;COUNT=2'
-            ],
-            'attendees': [
-              {'email': 'lpage@example.com'},
-              {'email': 'sbrin@example.com'}
             ],
             'reminders': {
               'useDefault': false,
@@ -116,70 +112,70 @@ function EventItem ({title, description, date, place, event_id, imageURL}) {
 
     return(
         <div>
-            
-            <Grid  item xs={12} container direction="row" alignItems="center" justify="space-evenly"> 
-                    <Grid item xs={6}>
-                        <img src ={imageURL} alt="image here" height="200px" width="300px"/>
-                    </Grid>
+          <Grid container direction="row" justify="center"> 
+            <Grid item xs={12} container direction="row" alignItems="flex-start"> 
+              <Grid item xs={5} container direction="row">
+                <Grid item xs={12}>
+                  <br></br>
+                  <br></br>
+                </Grid>
+                <Grid item xs={12}>
+                  <img className="eventPhoto" src ={imageURL} alt="image here" height="100%" width="100%"/>
+                </Grid>
+              </Grid>
+              
+              <Grid item xs={7} container> 
+                      <Grid item xs={1}>
 
-                    <Grid item xs={6}>
-                        <h2>{title}</h2>
-                    </Grid>
+                      </Grid>
+                      <Grid item xs={11}>
+                          <h2>{title}</h2>
+                      </Grid>
 
-
-
-                    <Grid item xs={6}>
+                      <Grid item xs={1}>
                         
-                    </Grid>
-
-                    <Grid item xs={6}>
-                        <p>{description}</p>
-                    </Grid>
-
-
-                    <Grid item xs={12}>
-                        <br></br>
-                    </Grid>
+                      </Grid>
+                      <Grid item xs={11}>
+                          <p>{description}</p>
+                      </Grid>
 
 
-                    <Grid item xs={6}>
+                      <Grid item xs={12}>
+                          <br></br>
+                          <br></br>
+                          <br></br>
+                          <br></br>
+                      </Grid>
+
+                      <Grid item xs={1}>
                         
-                    </Grid>
-
-                    <Grid item xs={6}>
-                        <Divider></Divider>
-                    </Grid>
+                      </Grid>
+                      <Grid item xs={11}>
+                          <Divider></Divider>
+                      </Grid>
 
               
-                    <Grid item xs={6}>
-                        
-                    </Grid>
+                      <Grid item xs={6} container justify="center">
+                          <p> {date}</p>
+                      </Grid>
 
-                    <Grid item xs={3}>
-                        <p> {date}</p>
-                    </Grid>
+                      <Grid item xs={6} container justify="center">
+                          <p>{place}</p>
+                      </Grid>
 
-                    <Grid item xs={3}>
-                        <p>{place}</p>
-                    </Grid>
-
-
+                      <Grid item xs={6} container justify="center">
+                          <button onClick={handleClick}>Add Event To Calendar</button>
                   
-                    <Grid item xs={6}>
-                        
-                    </Grid>
+                      </Grid>
 
-                    <Grid item xs={3}>
-                        <button onClick={handleClick}>Add Event To Calendar</button>
-                 
-                    </Grid>
-
-                    <Grid item xs={3}>
-                        <button onClick={buyTicketHandler}>Buy Ticket</button>
-                 
-                    </Grid>
+                      <Grid item xs={6} container justify="center">
+                          <button onClick={buyTicketHandler}>Buy Ticket</button>
                   
+                      </Grid>
+                    
+              </Grid>
             </Grid>
+          </Grid>
 
             <br></br>
             <br></br>
