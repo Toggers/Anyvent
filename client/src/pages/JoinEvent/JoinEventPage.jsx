@@ -8,6 +8,8 @@ import Eventbar from './Eventbar.jsx';
 import PageController from './PageController.jsx';
 import EventItem from './EventItem.jsx';
 
+import AuthContext from '../../context/auth-context';
+
 function Events(){
 	const [events, setEvents] = useState([])
 
@@ -58,15 +60,20 @@ function Events(){
 		fetchEvents()
 	}, [])
  	
-	const eventlist = events.map(element =>{
-		return <EventItem key={element._id} event_id={element._id} title={element.title} imageURL ={element.imageURL} description={element.description} date={element.eventDate} place={`${element.address_location} ${element.address_city} ${element.address_state} ${element.address_zipcode}`}> </EventItem>
-	});
+
+	// const eventlist = events.map(element =>{
+	// 	return <EventItem key={element._id} event_id={element._id} title={element.title} imageURL ={element.imageURL} description={element.description} date={element.eventDate} place={`${element.address_location} ${element.address_city} ${element.address_state} ${element.address_zipcode}`}> </EventItem>
+	// });
 
 
     const [totalEvents, setTotalEvents] = useState(100)
 
  	
     return (
+    	<AuthContext.Consumer>
+
+    	 {(context)=>{
+          	return (
 
     	<div>
 			<AppNavbar />
@@ -112,7 +119,12 @@ function Events(){
 					<Grid item xs={12} container direction="row"> 
 						
 						
-							{eventlist}
+							{//eventlist
+
+										events.map(element =>{
+										return (<EventItem key={element._id} context={context} event_id={element._id} title={element.title} imageURL ={element.imageURL} description={element.description} date={element.eventDate} place={`${element.address_location} ${element.address_city} ${element.address_state} ${element.address_zipcode}`}> </EventItem>);
+										})
+									}
 				
 					
                     </Grid> 
@@ -132,6 +144,10 @@ function Events(){
 			<br></br>
    	
    		</div>
+     );
+        }}
+    	
+   		</AuthContext.Consumer>
     );
 }
 

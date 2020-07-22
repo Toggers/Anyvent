@@ -99,13 +99,17 @@ export default function SignUp() {
         }
             return res.json();
         }).then(resData=>{
-            console.log(resData);
-            setEmail("");
-            setFirst("");
-            setLast("");
-            setPassword("");
 
-            alert("Registered successfully!!, now go to login page ");
+            if(resData.errors){
+              alert("User Already Exist")
+            }else{
+              setEmail("");
+              setFirst("");
+              setLast("");
+              setPassword("");
+
+              alert("Registered successfully!!, now go to login page ");
+            }
 
         }).catch(err =>{
             console.log(err);

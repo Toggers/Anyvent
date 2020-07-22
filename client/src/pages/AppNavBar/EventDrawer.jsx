@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import CreateIcon from '@material-ui/icons/Create';
 
+import AuthContext from '../../context/auth-context';
 
 const useStyles = makeStyles({
   list: {
@@ -50,7 +51,7 @@ function SwipeableDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const list = (anchor) => (
+  const list = (anchor, context) => (
     <div
       className={clsx(classes.list, {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
@@ -60,16 +61,36 @@ function SwipeableDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Home', 'Join Event', 'Create Event'].map((text, index) => (
-          <Link className="drawerLink" to={() => onPageSwitch(index)}>
-          <ListItem button key={text}>
-            <ListItemIcon>{index == 0 ? <HomeIcon /> : 
-                index == 1 ? <CreateIcon /> : <MailIcon />
-            }</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-          </Link>
-        ))}
+        {['Home', 'Join Event', 'Create Event'].map((text, index) =>{ 
+           if( text==='Join Event' || text==='Home'){
+              return ( <Link className="drawerLink" to={() => onPageSwitch(index)}>
+                      <ListItem button key={text}>
+                        <ListItemIcon>{index == 0 ? <HomeIcon /> : 
+                            index == 1 ? <CreateIcon /> : <MailIcon />
+                        }</ListItemIcon>
+                        <ListItemText primary={text} />
+                      </ListItem>
+                    </Link>
+                    ) ;      
+            }else{
+               return (<div>{context.token &&
+                        
+                          <Link className="drawerLink" to={() => onPageSwitch(index)}>
+                            <ListItem button key={text}>
+                              <ListItemIcon>{index == 0 ? <HomeIcon /> : 
+                              index == 1 ? <CreateIcon /> : <MailIcon />
+                              }</ListItemIcon>
+                            <ListItemText primary={text} />
+                            </ListItem>
+                          </Link>
+
+                        }
+                        </div>
+                    ) ;    
+            }
+
+          
+          })}
       </List>
       <Divider />
       
@@ -78,18 +99,27 @@ function SwipeableDrawer() {
 
   
   return (
-    <div>
-      {['left'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>
-              <MenuIcon color="action"></MenuIcon>
-          </Button>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
-    </div>
+     <AuthContext.Consumer>
+        
+        {(context)=>{
+          return (
+            <div>
+              {['left'].map((anchor) => (
+                <React.Fragment key={anchor}>
+                  <Button onClick={toggleDrawer(anchor, true)}>
+                      <MenuIcon color="action"></MenuIcon>
+                  </Button>
+                  <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+                    {list(anchor, context)}
+                  </Drawer>
+                </React.Fragment>
+              ))}
+            </div>
+            
+           );
+        }}
+          
+     </AuthContext.Consumer>
   );
 }
 

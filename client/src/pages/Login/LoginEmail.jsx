@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React ,{useState, useContext} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import AppNavbar from '../AppNavBar/AppNavbar.jsx';
 import googleSign from '../../images/googleSign.png';
+
+import AuthContext from '../../context/auth-context';
 
 function LoginEmail() {
 
@@ -45,6 +47,10 @@ function LoginEmail() {
 //-------------------------------------------------------Handle email,password, and submit-------------------------
   const [email, setEmail] = useState("");
   const [password, setPassword] =useState(""); 
+  // let contextType1 = AuthContext;
+  let value =useContext(AuthContext);
+  // const [contextType, setContextType]=useState(AuthContext);
+  // const [isLogin, setIsLogin] =useState(false);
 
 
   function emailHandler(e){
@@ -95,7 +101,12 @@ function LoginEmail() {
           setEmail("");
           setPassword("");
           alert("Found User!!!");
-            console.log(resData);
+          console.log(resData);
+          if(resData.data.login.token){
+    
+            value.login(resData.data.login.token, resData.data.login.userId, resData.data.login.tokenExpiration);
+          }
+
         }).catch(err =>{
             console.log(err);
       });

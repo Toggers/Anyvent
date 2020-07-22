@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,6 +11,8 @@ import '../events.css';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar.jsx';
+
+import AuthContext from '../../context/auth-context';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,6 +28,14 @@ const useStyles = makeStyles((theme) => ({
 
 function AppNavbar() {
     const classes = useStyles();
+    let value =useContext(AuthContext);
+
+    function logoutHandle(){
+        value.logout();
+    }
+
+
+
     return (
         <AppBar position="static" color="primary">
             <Toolbar>
@@ -59,11 +69,23 @@ function AppNavbar() {
                         </Link>
                     </Grid> 
 
-                    <Grid item xs={1} justify="flex-end">
-                        <Link className="logLink" to="/login">
-                            <Button color="inherit" variant="outlined">Login</Button>
-                        </Link>
-                    </Grid>
+
+                    <div>{ !value.token &&
+                            <Grid item xs={1} justify="flex-end">
+                                <Link className="logLink" to="/login">
+                                    <Button color="inherit" variant="outlined">Login</Button>
+                                </Link>
+                            </Grid>}
+                    </div>
+
+                    <div>{ value.token &&
+                            <Grid item xs={1} justify="flex-end">
+                                <Link className="logLink" to="/login">
+                                    <Button color="inherit" variant="outlined" onClick={logoutHandle}>Logout</Button>
+                                </Link>
+                            </Grid>}
+                    </div>
+                                
                 </Grid>
             </Toolbar>
         </AppBar>
