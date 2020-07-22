@@ -8,7 +8,7 @@ import PageController from './PageController.jsx';
 import Divider from '@material-ui/core/Divider';
 import Payment from './Payment.jsx'
 
-function EventItem ({context, title, description, date, place, event_id, imageURL}) {
+function EventItem ({context, title, description, date, place, event_id, imageURL, price}) {
 
     var gapi = window.gapi
     var CLIENT_ID = "828540566167-q88jt3ch2bnineavqegae2t6volaqfeq.apps.googleusercontent.com"
@@ -121,7 +121,7 @@ function EventItem ({context, title, description, date, place, event_id, imageUR
 
     const event = {
       title: title,
-      price: 10
+      price: price
     }
 
     return(
@@ -170,12 +170,13 @@ function EventItem ({context, title, description, date, place, event_id, imageUR
 
               
                       <Grid item xs={6} container justify="center">
-                          <p> &nbsp;&nbsp;&nbsp;&nbsp;{date}</p>
+                          <p className="dateText"> &nbsp;&nbsp;&nbsp;&nbsp;{date}</p>
                       </Grid>
 
                       <Grid item xs={6} container justify="center">
                           <p>{place}</p>
                       </Grid>
+
 
                       <Grid item xs={6} container justify="center">
                           <button onClick={handleClick}>Add Event To Calendar</button>
