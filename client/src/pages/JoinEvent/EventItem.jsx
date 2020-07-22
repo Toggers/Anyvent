@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import PageController from './PageController.jsx';
 import Divider from '@material-ui/core/Divider';
+import Payment from './Payment.jsx'
 
 function EventItem ({context, title, description, date, place, event_id, imageURL}) {
 
@@ -118,6 +119,11 @@ function EventItem ({context, title, description, date, place, event_id, imageUR
 
     }
 
+    const event = {
+      title: title,
+      price: 10
+    }
+
     return(
         <div>
           <Grid container direction="row" justify="center"> 
@@ -178,7 +184,7 @@ function EventItem ({context, title, description, date, place, event_id, imageUR
 
                       <Grid item xs={6} container justify="center">
                          {context.token&&<button onClick={buyTicketHandler}>Buy Ticket</button>}
-                  
+                          <Payment event={event}></Payment>
                       </Grid>
                     
               </Grid>
@@ -189,6 +195,8 @@ function EventItem ({context, title, description, date, place, event_id, imageUR
             <br></br>
 
             <Divider></Divider>
+
+          
         </div>
             
     )
