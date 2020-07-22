@@ -121,10 +121,10 @@ function Events(){
 						
 							{//eventlist
 
-										events.map(element =>{
-										return (<EventItem key={element._id} context={context} event_id={element._id} title={element.title} imageURL ={element.imageURL} description={element.description} date={element.eventDate} place={`${element.address_location} ${element.address_city} ${element.address_state} ${element.address_zipcode}`}> </EventItem>);
-										})
-									}
+								events.map(element =>{
+								return (<EventItem key={element._id} context={context} event_id={element._id} title={element.title} price={element.price} imageURL ={element.imageURL} description={element.description} date={element.eventDate} place={`${element.address_location} ${element.address_city} ${element.address_state} ${element.address_zipcode}`}> </EventItem>);
+								})
+							}
 				
 					
                     </Grid> 
