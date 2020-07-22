@@ -25,7 +25,7 @@ type Event {
     date:String!
     imageURL: String!
 
-    author: User
+    author: User!
 
 
         
@@ -44,6 +44,8 @@ input EventInput {
     eventDate: String!
     date: String!
     imageURL: String!
+    author: String
+
 }
 
 type User {
@@ -73,7 +75,7 @@ type RootQuery {
 type RootMutation {
     createEvent(eventInput: EventInput): Event
     createUser(userInput: UserInput): User
-    createTicket(eventID: ID!): Ticket
+    createTicket(eventID: ID!, userID: String!): Ticket
     cancelTicket(ticketID: ID!): Event
 }
 

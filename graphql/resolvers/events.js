@@ -21,9 +21,9 @@ module.exports = {
 
     },
     createEvent: async (args, req) =>{
-        // if(!req.isAuth){
-        //     throw new Error('Not authenticated!');
-        // }
+        if(!req.isAuth){
+            throw new Error('Not authenticated!');
+        }
 
         const newEvent= new Event({          //create new event
                 category: args.eventInput.category,
@@ -38,7 +38,7 @@ module.exports = {
                 eventDate: new Date(args.eventInput.eventDate),
                 date: new Date(args.eventInput.date),
                 imageURL: args.eventInput.imageURL,
-                author: '5f0fbb9d33fd28024c74694f'
+                author: args.eventInput.author
         });
 
         let newCreatedEvent;
@@ -51,7 +51,7 @@ module.exports = {
                             eventDate: (new Date(result._doc.eventDate)+""),
                             author: user_function.bind(this,result._doc.author)};
 
-            const foundUser= await User.findById('5f0fbb9d33fd28024c74694f');
+            const foundUser= await User.findById(args.eventInput.author);
 
 
             if(!foundUser){

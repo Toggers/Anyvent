@@ -1,15 +1,28 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import AppNavbar from '../AppNavBar/AppNavbar.jsx';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import '../events.css';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import { Link } from 'react-router-dom';
+
+import { Link, Redirect } from 'react-router-dom';
 import Title from './Title.jsx';
 import mountain from '../../images/mountain.png';
 
+import AuthContext from '../../context/auth-context';
+
 function HomePage() {
+
+    let value =useContext(AuthContext);
+
+    function checkLoginHandler(){
+        
+            alert("Please sign in first");
+            
+
+    }
+
     return(
         <div>
             <AppNavbar></AppNavbar>
@@ -66,11 +79,23 @@ function HomePage() {
                                 </Grid>
 
                                 <Grid item xs={2} container justify="center" alignItems="center">
-                                <button className="smallRectangle">
-                                    <Link href="#" variant="body2" to="/createEvent">
-                                    <ArrowForwardIosIcon style={{ fontSize: 30 }} color="secondary"></ArrowForwardIosIcon> 
-                                    </Link>
-                                </button>
+                                {value.token&&
+                                    <button className="smallRectangle">
+                                       <Link href="#" variant="body2" to="/createEvent">
+                                        <ArrowForwardIosIcon style={{ fontSize: 30 }} color="secondary"></ArrowForwardIosIcon> 
+                                       </Link>
+                                    
+                                    </button>}
+                                
+
+                                {!value.token&&
+                                    <button className="smallRectangle" onClick={checkLoginHandler}>
+                                            <ArrowForwardIosIcon style={{ fontSize: 30 }} color="secondary"></ArrowForwardIosIcon> 
+                                       
+                                    
+                                    </button>}
+                               
+                                
                                 </Grid>
                             </Grid>
                         </Paper>

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import AppNavbar from '../AppNavBar/AppNavbar.jsx';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -6,6 +6,8 @@ import '../events.css';
 import imageFiller from '../../images/imageFiller.png';
 import AddIcon from '@material-ui/icons/Add';
 import ReactFilestack from 'filestack-react';
+
+import AuthContext from '../../context/auth-context';
 
 
 function CreateEvent(){
@@ -27,6 +29,8 @@ function CreateEvent(){
 
   const [imageURL, setImageURL] =useState("");
   const [imageName, setImageName]=useState("");
+
+  let contextValue = useContext(AuthContext);
 
 
   
@@ -82,11 +86,16 @@ function CreateEvent(){
       e.preventDefault();                                                            //6. need to write this to use console.log() 
       const actual_time=eventDate+" "+time;
       console.log('state = ', title, description, price, e.target.name, actual_time, imageURL);
+      const token =contextValue.token;
+      const author=contextValue.userId;
+
+
+
 
       const requestBody={
         query:`
           mutation{
-            createEvent(eventInput:{category: "${category}", title:"${title}", description:"${description}", address_location: "${address_location}", address_city: "${address_city}", address_state: "${address_state}", address_zipcode: ${address_zipcode},capacity: ${capacity},price: ${price}, eventDate: "${actual_time}",date: "${new Date()+""}",  imageURL: "${imageURL}"}){
+            createEvent(eventInput:{category: "${category}", title:"${title}", description:"${description}", address_location: "${address_location}", address_city: "${address_city}", address_state: "${address_state}", address_zipcode: ${address_zipcode},capacity: ${capacity},price: ${price}, eventDate: "${actual_time}",date: "${new Date()+""}",  imageURL: "${imageURL}",author:"${author}"}){
                 _id
                 title
             }
@@ -94,17 +103,19 @@ function CreateEvent(){
         `
       };
 
+
       fetch('http://localhost:8000/graphql',{
           method: 'POST',
           body:JSON.stringify(requestBody),
 
           headers:{
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+token
          }
       }).then(res =>{
         
         if(res.status !==200 &&res.status !==201){
-          alert("There is error!!! Make sure you upload the image and fill in all the fields!!!")
+          alert("There is error!!! Make sure you upload the")
           throw new Error('Failed!');
         }
         return res.json();

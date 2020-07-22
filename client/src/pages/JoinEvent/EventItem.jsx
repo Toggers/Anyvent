@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import PageController from './PageController.jsx';
 import Divider from '@material-ui/core/Divider';
 
-function EventItem ({title, description, date, place, event_id, imageURL}) {
+function EventItem ({context, title, description, date, place, event_id, imageURL}) {
 
     var gapi = window.gapi
     var CLIENT_ID = "828540566167-q88jt3ch2bnineavqegae2t6volaqfeq.apps.googleusercontent.com"
@@ -80,20 +80,27 @@ function EventItem ({title, description, date, place, event_id, imageURL}) {
       const requestBody={
         query:`
           mutation{
-            createTicket(eventID: "${event_id}"){
+            createTicket(eventID: "${event_id}", userID: "${context.userId}"){
                 _id
+                ticketNum
+
             }
           }
         `
       };
+
+      const token=context.token;
 
       fetch('http://localhost:8000/graphql',{
           method: 'POST',
           body:JSON.stringify(requestBody),
 
           headers:{
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+ token
+
          }
+
       }).then(res =>{
         
         if(res.status !==200 &&res.status !==201){
@@ -102,7 +109,8 @@ function EventItem ({title, description, date, place, event_id, imageURL}) {
         return res.json();
       }).then(resData =>{
 
-        alert(`Purchased!! The default user with id: ${"5f0fbb9d33fd28024c74694f"} has purchased the event ${title}, event id: ${event_id}      ......  Check Database`);
+        console.log(resData);
+        alert(`Purchased!! Ticket Number: ${resData.data.createTicket.ticketNum} The user with id: ${context.userId} has purchased the event ${title}, event id: ${event_id}      ......  Check Database`);
 
       }).catch(err =>{
         console.log(err);
@@ -156,7 +164,7 @@ function EventItem ({title, description, date, place, event_id, imageURL}) {
 
               
                       <Grid item xs={6} container justify="center">
-                          <p> {date}</p>
+                          <p> &nbsp;&nbsp;&nbsp;&nbsp;{date}</p>
                       </Grid>
 
                       <Grid item xs={6} container justify="center">
@@ -169,7 +177,7 @@ function EventItem ({title, description, date, place, event_id, imageURL}) {
                       </Grid>
 
                       <Grid item xs={6} container justify="center">
-                          <button onClick={buyTicketHandler}>Buy Ticket</button>
+                         {context.token&&<button onClick={buyTicketHandler}>Buy Ticket</button>}
                   
                       </Grid>
                     
