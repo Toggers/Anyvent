@@ -75,9 +75,14 @@ function EventItem ({context, title, description, date, place, event_id, imageUR
       })
     }
 
+    const [buyTicket, setBuyTicket]=useState(false);
+
     function buyTicketHandler(){
        console.log("click buy");
+       setBuyTicket(true);
+    }
 
+    function buyFreeHandler(){
       const requestBody={
         query:`
           mutation{
@@ -110,13 +115,15 @@ function EventItem ({context, title, description, date, place, event_id, imageUR
         return res.json();
       }).then(resData =>{
 
-        console.log(resData);
+        setBuyTicket(false);
         alert(`Purchased!! Ticket Number: ${resData.data.createTicket.ticketNum} The user with id: ${context.userId} has purchased the event ${title}, event id: ${event_id}      ......  Check Database`);
 
       }).catch(err =>{
         console.log(err);
       });
-
+    }
+    function notSigninHandler(){
+      alert("Please sign in first");
     }
 
     const event = {
@@ -184,8 +191,11 @@ function EventItem ({context, title, description, date, place, event_id, imageUR
                       </Grid>
 
                       <Grid item xs={6} container justify="center">
-                         {context.token&&<button onClick={buyTicketHandler}>Buy Ticket</button>}
-                          <Payment event={event}></Payment>
+                         {!context.token&&<button onClick={notSigninHandler}>Buy Ticket</button>}
+                         {context.token&&!buyTicket&&<button onClick={buyTicketHandler}>Buy Ticket</button>}
+                         {context.token&&buyTicket&&price===0&&<button onClick={buyFreeHandler}>Get Free</button>}
+                        
+                         {context.token&&buyTicket&&price!==0&&<Payment event={event} context={context} event_id={event_id}></Payment>}
                       </Grid>
                     
               </Grid>

@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure();
 
-function Payment({event}) {
+function Payment({event, context, event_id}) {
     async function handleToken(token) {
 
         const response = await axios.post('http://localhost:8000/checkout', {
@@ -26,6 +26,47 @@ function Payment({event}) {
         if (status == "success") {
             toast("Success! Check email for details",
             { type: "success" });
+
+
+            const requestBody={
+                query:`
+                  mutation{
+                    createTicket(eventID: "${event_id}", userID: "${context.userId}"){
+                        _id
+                        ticketNum
+
+                    }
+                  }
+                `
+              };
+
+              const token=context.token;
+
+              fetch('http://localhost:8000/graphql',{
+                  method: 'POST',
+                  body:JSON.stringify(requestBody),
+
+                  headers:{
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+ token
+
+                 }
+
+              }).then(res =>{
+                
+                if(res.status !==200 &&res.status !==201){
+                  throw new Error('Failed!');
+                }
+                return res.json();
+              }).then(resData =>{
+
+                console.log(resData);
+                alert(`Purchased!! Ticket Number: ${resData.data.createTicket.ticketNum} The user with id: ${context.userId} has purchased the event ${event.title}, event id: ${event_id}      ......  Check Database`);
+
+              }).catch(err =>{
+                console.log(err);
+            });
+
         } else {
             toast("Something went wrong", { type: 
                 "error" });
