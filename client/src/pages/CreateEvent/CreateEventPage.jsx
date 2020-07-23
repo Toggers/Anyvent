@@ -174,7 +174,7 @@ function CreateEvent(){
                <Grid item xs={12}>
                 
                   <Grid container justify="center">
-                    <h1>Create an Event</h1>
+                    <h1 className="createTitle">Create an Event</h1>
                   </Grid>
                 
                 </Grid> 

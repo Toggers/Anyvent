@@ -134,10 +134,9 @@ function EventItem ({context, title, description, date, place, event_id, imageUR
     return(
         <div>
           <Grid container direction="row" justify="center"> 
-            <Grid item xs={12} container direction="row" alignItems="flex-start"> 
+            <Grid item xs={12} container direction="row" alignItems="space-evenly"> 
               <Grid item xs={5} container direction="row">
                 <Grid item xs={12}>
-                  <br></br>
                   <br></br>
                 </Grid>
                 <Grid item xs={12}>
@@ -150,19 +149,18 @@ function EventItem ({context, title, description, date, place, event_id, imageUR
 
                       </Grid>
                       <Grid item xs={11}>
-                          <h2>{title}</h2>
+                          <h3 className="eventTitle">{title}</h3>
                       </Grid>
 
                       <Grid item xs={1}>
                         
                       </Grid>
                       <Grid item xs={11}>
-                          <p>{description}</p>
+                          <p className="eventDescription">{description}</p>
                       </Grid>
 
 
                       <Grid item xs={12}>
-                          <br></br>
                           <br></br>
                           <br></br>
                           <br></br>
