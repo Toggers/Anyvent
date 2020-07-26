@@ -12,7 +12,7 @@ import AuthContext from '../../context/auth-context';
 
 function CreateEvent(){
 
-  const [category, setCategory] = useState("Hackthon");
+  const [category, setCategory] = useState("Hackathon");
   const [capacity, setCapacity] =useState(0); 
   const [title,setTitle]= useState(""); 
   const [description,setDescription]= useState(""); 
@@ -125,7 +125,7 @@ function CreateEvent(){
           
           alert("There is an error!! Make sure you upload the image and fill in all the fields!!!")
         }else{
-          setCategory("Hackthon");
+          setCategory("Hackathon");
           setCapacity(0); 
           setTitle(""); 
           setDescription(""); 
@@ -236,7 +236,7 @@ function CreateEvent(){
 
                        <Grid item xs={6}>
                           <select value={category} onChange={handleCategoryChange} >
-                             <option value="Hackthon">Hackthon</option>
+                             <option value="Hackathon">Hackathon</option>
                               <option value="Art Show">Art Show</option>
                                 <option value="Convention">Convention</option>
                               <option value="Concert">Concert</option>
