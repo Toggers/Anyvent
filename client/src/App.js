@@ -6,6 +6,8 @@ import JoinEventsPage from './pages/JoinEvent/JoinEventPage';
 import LoginPage from './pages/Login/LoginPage';
 import SignUpPage from './pages/SignUp/SignUpPage';
 
+import MyTickets from './pages/MyList/MyList';
+
 import AuthContext from './context/auth-context';
 
 
@@ -39,6 +41,7 @@ function App() {
         	      {variable.token && <Route path="/createEvent" exact component={CreateEventsPage}/>}
                <Route path="/login" exact component={LoginPage}/>
                <Route path="/signup" exact component={SignUpPage}/>
+                {variable.token && <Route path="/mytickets" exact component={MyTickets}/>}
 
       	</Switch>
       </AuthContext.Provider>

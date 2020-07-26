@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 
 import HomeIcon from '@material-ui/icons/Home';
 import CreateIcon from '@material-ui/icons/Create';
-
+import ListIcon from '@material-ui/icons/List';
 import AuthContext from '../../context/auth-context';
 
 const useStyles = makeStyles({
@@ -34,6 +34,8 @@ function onPageSwitch(index) {
         return "/joinEvent"
     } else if (index == 2) {
         return "/createEvent"
+    }else if (index== 3){
+      return "/mytickets"
     }
 }
 
@@ -61,7 +63,7 @@ function SwipeableDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Home', 'Join Event', 'Create Event'].map((text, index) =>{ 
+        {['Home', 'Join Event', 'Create Event', 'My Tickets'].map((text, index) =>{ 
            if( text==='Join Event' || text==='Home'){
               return ( <Link className="drawerLink" to={() => onPageSwitch(index)}>
                       <ListItem button key={text}>
@@ -78,7 +80,7 @@ function SwipeableDrawer() {
                           <Link className="drawerLink" to={() => onPageSwitch(index)}>
                             <ListItem button key={text}>
                               <ListItemIcon>{index == 0 ? <HomeIcon /> : 
-                              index == 1 ? <CreateIcon /> : <MailIcon />
+                              index == 1 ? <CreateIcon /> :index == 2 ? <MailIcon /> : <ListIcon />
                               }</ListItemIcon>
                             <ListItemText primary={text} />
                             </ListItem>

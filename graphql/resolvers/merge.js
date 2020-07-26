@@ -41,7 +41,8 @@ const ticket_event_function =async eventID =>{
         return{
             ...event._doc,
             author: user_function.bind(this, event.author),
-            date: new Date(event._doc.date).toISOString()
+            date: (new Date(event._doc.date)+""),
+            eventDate:  (new Date(event._doc.eventDate)+"")
         }
     }catch(err){
         throw err;
@@ -50,5 +51,5 @@ const ticket_event_function =async eventID =>{
 
 
 exports.user_function= user_function;
-// exports.events_function = events_function;
+exports.events_function = events_function;
 exports.ticket_event_function = ticket_event_function;

@@ -1,7 +1,7 @@
 const Ticket = require('../../models/ticket');
 const Event= require('../../models/event');
 
-const {ticket_event_function, user_function} =require('./merge');
+const {ticket_event_function, user_function, events_function} =require('./merge');
 
 
 module.exports ={
@@ -15,7 +15,7 @@ module.exports ={
 				return {...ticket._doc,
 					user: user_function.bind(this,ticket._doc.user),
 					event:  ticket_event_function.bind(this,ticket._doc.event),
-					date: new Date(ticket._doc.date).toISOString()	
+					date: new Date(ticket._doc.date).toISOString()
 				};
 			});
 		}catch(err){
