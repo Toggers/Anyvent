@@ -18,11 +18,16 @@ import '../events.css';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
 import LoginEmail from './LoginEmail';
+import GoogleLogin from 'react-google-login';
+import ReactDOM from "react-dom";   
 
 
 
 function LoginPage() {
     const [emailLogin, setEmailLogin] = useState(false)
+    const responseGoogle = (response) => {
+        console.log(response);
+    };
     
     function onPageSwitch() {
         setEmailLogin(true)
@@ -44,6 +49,15 @@ function LoginPage() {
     
                 <Grid item xs={12} container justify="center">
                     <img className="googleSign" src={googleSign} />
+                    
+                    {/* <GoogleLogin
+                        clientId="828540566167-q88jt3ch2bnineavqegae2t6volaqfeq.apps.googleusercontent.com"
+                        buttonText="Login"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    /> */}
+                  
                 </Grid>
     
                 

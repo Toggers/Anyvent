@@ -7,7 +7,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import '../events.css';
 
 
-function PageController({ totalEvents}) {
+function PageController({ totalEvents, fetchEvents, eventsPerPage}) {
     const [group, setGroup] = useState([]) 
 
     useEffect(() => {
@@ -20,7 +20,6 @@ function PageController({ totalEvents}) {
     }
 
     var pages = []
-    let eventsPerPage = 10
     let pagesPerGroup = 5
 
     let startPage = (group - 1) * pagesPerGroup + 1
@@ -45,8 +44,8 @@ function PageController({ totalEvents}) {
     } 
 
 
-    function movePage(num) {
-        //onPageSwitch(num)
+    function movePage(pageNum) {
+        fetchEvents(pageNum)
     }
 
     function onArrowSwitch(forward) {
