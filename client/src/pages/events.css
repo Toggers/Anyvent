@@ -124,13 +124,13 @@
 }
 
 .createTitle {
-	font-family: fantasy;
-	font-size: 250%;
+	font-family: "Lucida Console", Courier, monospace;
+	font-size: 200%;
 	font-style: bold;
 }
 
 .joinEventTitle {
-	font-family: fantasy;
+	font-family: "Lucida Console", Courier, monospace;
 	font-size: 100%;
 	font-style: bold;
 }

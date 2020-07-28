@@ -12,8 +12,10 @@ import AuthContext from '../../context/auth-context';
 
 function Events(){
 	const [events, setEvents] = useState([])
+	const [totalEvents, setTotalEvents] = useState(0)
+	var eventsPerPage = 10
 
-	function fetchEvents(){
+	function fetchEvents(pageNum){
 		const requestBody={
 			query:`
 				query {
@@ -47,26 +49,35 @@ function Events(){
    			}
    			return res.json();
 		}).then(resData =>{
-			const events1= resData.data.events;
-			console.log(events1)
-			setEvents(events1);
+			const events1= resData.data.events
+			console.log(events1.length)
+			setTotalEvents(events1.length)
 
+			const eventsOnPage = [];
+			var firstEvent = (pageNum - 1) * eventsPerPage
+			var lastEvent = firstEvent + eventsPerPage
+
+			for (var i = firstEvent; i < lastEvent; i++) {
+				console.log(i)
+				if (i > events1.length - 1) {
+					break;
+				}
+				eventsOnPage[i] = events1[i];
+			}
+			setEvents(eventsOnPage);
 		}).catch(err =>{
    			console.log(err);
 		});
 	};
 
 	useEffect(() => {
-		fetchEvents()
+		fetchEvents(1)
 	}, [])
  	
 
 	// const eventlist = events.map(element =>{
 	// 	return <EventItem key={element._id} event_id={element._id} title={element.title} imageURL ={element.imageURL} description={element.description} date={element.eventDate} place={`${element.address_location} ${element.address_city} ${element.address_state} ${element.address_zipcode}`}> </EventItem>
 	// });
-
-
-    const [totalEvents, setTotalEvents] = useState(100)
 
  	
     return (
@@ -137,7 +148,7 @@ function Events(){
 
 			<Grid item xs={12} container justify="center" alignItems="center">
 				<Paper>
-					<PageController totalEvents={ totalEvents } />
+					<PageController totalEvents={totalEvents}  fetchEvents={fetchEvents} eventsPerPage={eventsPerPage}/>
 				</Paper> 
             </Grid> 
 
