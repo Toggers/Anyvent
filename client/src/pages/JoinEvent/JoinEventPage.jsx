@@ -13,6 +13,8 @@ import AuthContext from '../../context/auth-context';
 function Events(){
 	const [events, setEvents] = useState([])
 	const [totalEvents, setTotalEvents] = useState(0)
+	const [viewAll, setViewAll] = useState(false)
+
 	var eventsPerPage = 10
 
 	function fetchEvents(pageNum){
@@ -50,7 +52,6 @@ function Events(){
    			return res.json();
 		}).then(resData =>{
 			const events1= resData.data.events
-			console.log(events1.length)
 			setTotalEvents(events1.length)
 
 			const eventsOnPage = [];
@@ -58,7 +59,6 @@ function Events(){
 			var lastEvent = firstEvent + eventsPerPage
 
 			for (var i = firstEvent; i < lastEvent; i++) {
-				console.log(i)
 				if (i > events1.length - 1) {
 					break;
 				}
@@ -75,9 +75,17 @@ function Events(){
 	}, [])
  	
 
-	// const eventlist = events.map(element =>{
-	// 	return <EventItem key={element._id} event_id={element._id} title={element.title} imageURL ={element.imageURL} description={element.description} date={element.eventDate} place={`${element.address_location} ${element.address_city} ${element.address_state} ${element.address_zipcode}`}> </EventItem>
-	// });
+	function showAll() {
+		eventsPerPage = totalEvents
+		setViewAll(true)
+		fetchEvents(1)
+	}
+
+	function hideAll() {
+		eventsPerPage = 10
+		setViewAll(false)
+		fetchEvents(1)
+	}
 
  	
     return (
@@ -119,10 +127,9 @@ function Events(){
 			<br></br>
 			<br></br>
 
-			<Eventbar />
+			<Eventbar showAll={showAll} hideAll={hideAll}/>
 
 			<br></br>
-
 
 			<Grid item xs={12} container justify="center"> 
 			<Grid item xs={8}> 
@@ -148,7 +155,7 @@ function Events(){
 
 			<Grid item xs={12} container justify="center" alignItems="center">
 				<Paper>
-					<PageController totalEvents={totalEvents}  fetchEvents={fetchEvents} eventsPerPage={eventsPerPage}/>
+					{!viewAll&&<PageController totalEvents={totalEvents}  fetchEvents={fetchEvents} eventsPerPage={eventsPerPage}/>}
 				</Paper> 
             </Grid> 
 

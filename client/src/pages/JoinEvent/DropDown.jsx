@@ -35,6 +35,13 @@ function DropDown() {
     setOpen(true);
   };
 
+  const handleClick = (event) => {
+    var val = event.target.value;
+    console.log(event) 
+    console.log(event.target) 
+    console.log(val) 
+}
+
   return (
     <div>
       <Grid container alignItems="center">
@@ -52,10 +59,10 @@ function DropDown() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Hackathons</MenuItem>
-          <MenuItem value={20}>Concerts</MenuItem>
-          <MenuItem value={30}>Conventions</MenuItem>
-          <MenuItem value={30}>Art Shows</MenuItem>
+          <MenuItem value={10} onClick={handleClick}>Hackathons</MenuItem>
+          <MenuItem value={20} onClick={handleClick}>Concerts</MenuItem>
+          <MenuItem value={30} onClick={handleClick}>Conventions</MenuItem>
+          <MenuItem value={40} onClick={handleClick}>Art Shows</MenuItem>
         </Select>
       </FormControl>
       </Grid>

@@ -68,7 +68,7 @@ function SwipeableDrawer() {
               return ( <Link className="drawerLink" to={() => onPageSwitch(index)}>
                       <ListItem button key={text}>
                         <ListItemIcon>{index == 0 ? <HomeIcon /> : 
-                            index == 1 ? <CreateIcon /> : <MailIcon />
+                            index == 1 ? <MailIcon /> : <CreateIcon />
                         }</ListItemIcon>
                         <ListItemText primary={text} />
                       </ListItem>
@@ -80,7 +80,7 @@ function SwipeableDrawer() {
                           <Link className="drawerLink" to={() => onPageSwitch(index)}>
                             <ListItem button key={text}>
                               <ListItemIcon>{index == 0 ? <HomeIcon /> : 
-                              index == 1 ? <CreateIcon /> :index == 2 ? <MailIcon /> : <ListIcon />
+                              index == 1 ? <MailIcon /> :index == 2 ? <CreateIcon /> : <ListIcon />
                               }</ListItemIcon>
                             <ListItemText primary={text} />
                             </ListItem>
