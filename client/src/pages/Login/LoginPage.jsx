@@ -34,8 +34,6 @@ function LoginPage() {
     }
 
     if (emailLogin) {
-        console.log(emailLogin)
-        console.log('hi')
         return <LoginEmail />
     } else {
         return (

@@ -11,7 +11,18 @@ import InputBase from '@material-ui/core/InputBase';
 import { blue } from '@material-ui/core/colors';
 
 
-function Eventbar() {
+function Eventbar({showAll, hideAll}) {
+	const [viewAll, setViewAll] = useState(false) 
+
+	function onViewAll() {
+		setViewAll(true)
+		showAll()
+	}
+
+	function onHideAll() {
+		setViewAll(false)
+		hideAll()
+	}
 
     return(
         
@@ -40,7 +51,8 @@ function Eventbar() {
 							</Grid>
 
 							<Grid item xs={2}>
-								<Button variant="outlined" color="primary">View All</Button>
+								{!viewAll&&<Button variant="outlined" color="primary" onClick={onViewAll}>View All</Button>}
+								{viewAll&&<Button variant="outlined" color="primary" onClick={onHideAll}>Hide All</Button>}
 							</Grid>
 					
 					</Grid>

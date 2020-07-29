@@ -26,9 +26,7 @@ function HomePage() {
     return(
         <div>
             <AppNavbar></AppNavbar>
-
-            
-            
+  
             <br></br>
             <br></br>                
             
