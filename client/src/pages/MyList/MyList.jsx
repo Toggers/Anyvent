@@ -44,6 +44,7 @@ function MyListPage(){
                 address_city
                 address_state
                 address_zipcode
+                price
 
               }
               
@@ -80,6 +81,7 @@ function MyListPage(){
     useEffect(() => {
       fetchTickets()
     });
+  
   
 
     return (

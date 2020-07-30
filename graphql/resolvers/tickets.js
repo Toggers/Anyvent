@@ -68,6 +68,30 @@ module.exports ={
 		}catch(err){
 			throw err;
 		}
+	},
+	 updateTicketRefund: async (args,req) =>{
+		if(!req.isAuth){
+            throw new Error('Not authenticated!');
+        }
+        
+		try{
+			const ticket =await Ticket.findById(args.ticketID).populate('event');    //now there is event info inside variable ticket 
+
+			const event ={...ticket.event._doc, 
+				author: user_function.bind(this,ticket.event._doc.author)}
+
+			const newTicketNum = await Ticket.findById(args.ticketID);
+			
+			await Ticket.updateOne({_id: args.ticketID}, {ticketNum: newTicketNum.ticketNum + args.cancelReason }, function(err){
+				if(err){
+					console.log(err);
+				}
+			})
+			
+			return event;
+		}catch(err){
+			throw err;
+		}
 	}
 
 }

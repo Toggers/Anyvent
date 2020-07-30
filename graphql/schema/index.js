@@ -77,6 +77,7 @@ type RootMutation {
     createUser(userInput: UserInput): User
     createTicket(eventID: ID!, userID: String!): Ticket
     cancelTicket(ticketID: ID!): Event
+    updateTicketRefund(ticketID: ID!, cancelReason: String!): Event
 }
 
 schema {
