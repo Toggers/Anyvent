@@ -63,7 +63,7 @@ function LoginEmail() {
 
   function onSubmitHandler(e){
      e.preventDefault(); 
-     console.log(email,password);
+     
 
       if(email.trim().length===0||password.trim().length==0){
         return;

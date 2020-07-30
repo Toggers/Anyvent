@@ -7,6 +7,7 @@ import LoginPage from './pages/Login/LoginPage';
 import SignUpPage from './pages/SignUp/SignUpPage';
 
 import MyTickets from './pages/MyList/MyList';
+import Refund from './pages/Admin/Refund';
 
 import AuthContext from './context/auth-context';
 
@@ -35,13 +36,15 @@ function App() {
     <BrowserRouter>
       <AuthContext.Provider value={{token: variable.token, userId: variable.userId, login: login, logout:logout}}>
       	<Switch>
-      		      {variable.token && <Redirect from="/login" to ="/joinEvent" exact />}
+      		      {variable.token && variable.userId!=="5f2304eb3cbc9b06c8450c29" &&<Redirect from="/login" to ="/joinEvent" exact />}
+                {variable.token &&<Redirect from="/login" to ="/requestRefund" exact />}
       		      <Route path="/joinEvent" exact component={JoinEventsPage}/>
         		    <Route path="/" exact component={HomePage}/>
         	      {variable.token && <Route path="/createEvent" exact component={CreateEventsPage}/>}
                <Route path="/login" exact component={LoginPage}/>
                <Route path="/signup" exact component={SignUpPage}/>
                 {variable.token && <Route path="/mytickets" exact component={MyTickets}/>}
+                {variable.token && variable.userId==="5f2304eb3cbc9b06c8450c29" &&<Route path="/requestRefund" exact component={Refund}/>}
 
       	</Switch>
       </AuthContext.Provider>

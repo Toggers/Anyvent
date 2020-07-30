@@ -16,9 +16,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
       <Dialog open={open} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Cancel Event and Request for Refund</DialogTitle>
         <DialogContent>
+
           <DialogContentText>
             Provide reason why you like to cancel this event
           </DialogContentText>
+
           <textarea
             autoFocus
             margin="dense"

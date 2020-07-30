@@ -99,6 +99,46 @@ function SwipeableDrawer() {
     </div>
   );
 
+  function onPageSwitch2(index) {
+    if (index == 0) {
+        return "/"
+    } else {
+      return "/requestRefund"
+    }
+}
+
+   const adminList = (anchor, context) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {['Home','Request Refund Lists'].map((text, index) =>{ 
+           
+               return (<div>{context.token &&
+                        
+                          <Link className="drawerLink" to={() => onPageSwitch2(index)}>
+                            <ListItem button key={text}>
+                              <ListItemIcon>{index == 0 ? <HomeIcon />: <ListIcon />
+                              }</ListItemIcon>
+                            <ListItemText primary={text} />
+                            </ListItem>
+                          </Link>
+
+                        }
+                        </div>
+                    ) ;    
+          })}
+      </List>
+      <Divider />
+      
+    </div>
+  );
+
   
   return (
      <AuthContext.Consumer>
@@ -111,9 +151,16 @@ function SwipeableDrawer() {
                   <Button onClick={toggleDrawer(anchor, true)}>
                       <MenuIcon color="action"></MenuIcon>
                   </Button>
-                  <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                    {list(anchor, context)}
-                  </Drawer>
+
+                  {context.userId!=="5f2304eb3cbc9b06c8450c29" ? 
+                    (<Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+                      {list(anchor, context)}
+                    </Drawer>): 
+                    (<Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+                      {adminList(anchor, context)}
+                    </Drawer>)
+                  }
+
                 </React.Fragment>
               ))}
             </div>
