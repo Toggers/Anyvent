@@ -14,8 +14,10 @@ function Events(){
 	const [events, setEvents] = useState([])
 	const [totalEvents, setTotalEvents] = useState(0)
 	const [viewAll, setViewAll] = useState(false)
+	//const [filter, setFilter] = useState("")
 
-	var eventsPerPage = 10
+	var filter = ""
+	var eventsPerPage = 5
 
 	function fetchEvents(pageNum){
 		const requestBody={
@@ -52,19 +54,31 @@ function Events(){
    			return res.json();
 		}).then(resData =>{
 			const events1= resData.data.events
-			setTotalEvents(events1.length)
 
 			const eventsOnPage = [];
 			var firstEvent = (pageNum - 1) * eventsPerPage
 			var lastEvent = firstEvent + eventsPerPage
-
-			for (var i = firstEvent; i < lastEvent; i++) {
+		
+			var i = firstEvent
+			while (i < lastEvent) {
 				if (i > events1.length - 1) {
-					break;
+					break
 				}
-				eventsOnPage[i] = events1[i];
+
+				if (filter === "") {
+					eventsOnPage[i] = events1[i]
+				} else {
+					if (events1[i].category === filter) {
+						eventsOnPage[i] = events1[i]
+					}
+					lastEvent++
+				}
+
+				i++
 			}
 			setEvents(eventsOnPage);
+			setTotalEvents(events1.length)
+		
 		}).catch(err =>{
    			console.log(err);
 		});
@@ -83,7 +97,22 @@ function Events(){
 
 	function hideAll() {
 		eventsPerPage = 10
-		setViewAll(false)
+		if (filter != "") {
+			
+		} else {	
+			setViewAll(false)
+		}
+		fetchEvents(1)
+	}
+
+	function filterEvents(type) {
+		filter = type
+		console.log(type)
+		if (type === "") {
+			setViewAll(false)
+		} else {
+			setViewAll(true)
+		}
 		fetchEvents(1)
 	}
 
@@ -127,7 +156,7 @@ function Events(){
 			<br></br>
 			<br></br>
 
-			<Eventbar showAll={showAll} hideAll={hideAll}/>
+			<Eventbar showAll={showAll} hideAll={hideAll} filterEvents={filterEvents}/>
 
 			<br></br>
 

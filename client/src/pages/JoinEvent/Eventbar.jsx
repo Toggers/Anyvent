@@ -11,7 +11,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { blue } from '@material-ui/core/colors';
 
 
-function Eventbar({showAll, hideAll}) {
+function Eventbar({showAll, hideAll, filterEvents}) {
 	const [viewAll, setViewAll] = useState(false) 
 
 	function onViewAll() {
@@ -22,6 +22,10 @@ function Eventbar({showAll, hideAll}) {
 	function onHideAll() {
 		setViewAll(false)
 		hideAll()
+	}
+
+	function onFilter(type) {
+		filterEvents(type)
 	}
 
     return(
@@ -47,7 +51,7 @@ function Eventbar({showAll, hideAll}) {
 							</Grid>
 
 							<Grid item xs={2}>
-                                <DropDown></DropDown>
+                                <DropDown onFilter={onFilter}></DropDown>
 							</Grid>
 
 							<Grid item xs={2}>
