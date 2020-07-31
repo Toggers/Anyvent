@@ -84,8 +84,9 @@ function MyListPage(){
       
       <div>
       <AppNavbar></AppNavbar>    
-
-          <h2 style={{ display: 'flex', justifyContent: 'center',  alignItems: 'center', fontSize: '30px' }}> My Lists</h2>
+          <br></br>
+        
+          <h2 className="myList" style={{ display: 'flex', justifyContent: 'center',  alignItems: 'center', fontSize: '30px' }}> My Lists</h2>
 
 
           {loading &&

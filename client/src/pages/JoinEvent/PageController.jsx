@@ -63,33 +63,38 @@ function PageController({ totalEvents, fetchEvents, eventsPerPage}) {
     let backArrow;
     let forwardArrow
     if (group == 1 && lastGroup) {
-        backArrow = <Icon color="primary"><ArrowBackIosIcon/></Icon>
+        backArrow = <Icon color="disabled"><ArrowBackIosIcon/></Icon>
 
-        forwardArrow = <Icon color="primary"><ArrowForwardIosIcon/></Icon>
+        forwardArrow = <Icon color="disabled"><ArrowForwardIosIcon/></Icon>
     } else if (group == 1) {
-        backArrow = <Icon color="primary"><ArrowBackIosIcon/></Icon>
+        backArrow = <Icon color="disabled"><ArrowBackIosIcon/></Icon>
 
         forwardArrow = <Icon color="primary" onClick={() => onArrowSwitch(true)}><ArrowForwardIosIcon/></Icon>
     } else if (lastGroup) {
         backArrow = <Icon color="primary" onClick={() => onArrowSwitch(false)}><ArrowBackIosIcon/></Icon>
 
-        forwardArrow = <Icon color="primary"><ArrowForwardIosIcon/></Icon>
+        forwardArrow = <Icon color="disabled"><ArrowForwardIosIcon/></Icon>
     } else {
         backArrow = <Icon color="primary" onClick={() => onArrowSwitch(false)}><ArrowBackIosIcon/></Icon>
 
         forwardArrow = <Icon color="primary" onClick={() => onArrowSwitch(true)}><ArrowForwardIosIcon/></Icon>
     }
 
+
     return(
-        <Grid container direction="row" justify="space-evenly" alignItems="center">
-            {backArrow}
-    
-            { pages.map(num => (
-                <Button id={num} size="medium" key={num} onClick={() => movePage(num)}>{num}</Button>
-            ))}
-    
-            {forwardArrow}
-        </Grid>
+        <div >
+            <Grid container alignItems="center" justify="center">
+                {backArrow}
+             
+                { pages.map(num => (
+                        <Button variant="outlined" id={num} size="medium" key={num} onClick={() => movePage(num)}>{num}</Button>
+                ))}
+             
+                {forwardArrow}
+         
+            </Grid>
+
+        </div>
     )
 } 
 

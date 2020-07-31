@@ -135,7 +135,15 @@
 	font-style: bold;
 }
 
+.myList {
+	font-family: "Lucida Console", Courier, monospace;
+	font-size: 100%;
+	font-style: bold;
+}
 
+.pageController {
+	border: 1px solid black;
+}
 
 .titleNav {
 	font-family: "Lucida Console", Courier, monospace;

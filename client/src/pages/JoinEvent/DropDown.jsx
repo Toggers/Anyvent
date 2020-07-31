@@ -6,6 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import filestackReact from 'filestack-react';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function DropDown() {
+function DropDown({onFilter}) {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -35,12 +36,10 @@ function DropDown() {
     setOpen(true);
   };
 
-  const handleClick = (event) => {
-    var val = event.target.value;
-    console.log(event) 
-    console.log(event.target) 
-    console.log(val) 
-}
+  function handleClick(type) {
+    console.log('hi')
+    onFilter(type)
+  }
 
   return (
     <div>
@@ -56,13 +55,13 @@ function DropDown() {
           value={age}
           onChange={handleChange}
         >
-          <MenuItem value="">
+          <MenuItem value="" onClick={() => handleClick("")}>
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10} onClick={handleClick}>Hackathons</MenuItem>
-          <MenuItem value={20} onClick={handleClick}>Concerts</MenuItem>
-          <MenuItem value={30} onClick={handleClick}>Conventions</MenuItem>
-          <MenuItem value={40} onClick={handleClick}>Art Shows</MenuItem>
+          <MenuItem value={10} onClick={() => handleClick("Hackathon")}>Hackathons</MenuItem>
+          <MenuItem value={20} onClick={() => handleClick("Concert")}>Concerts</MenuItem>
+          <MenuItem value={30} onClick={() => handleClick("Convention")}>Conventions</MenuItem>
+          <MenuItem value={40} onClick={() => handleClick("Art Show")}>Art Shows</MenuItem>
         </Select>
       </FormControl>
       </Grid>
